@@ -1,0 +1,44 @@
+[
+  {
+    "Comercializadora": "Iberdrola",
+    "Nombre_Tarifa": "Plan Gas Hogar",
+    "Termino_Fijo_Dia": 6.25,
+    "Termino_Variable_kWh": 0.115728
+  },
+  {
+    "Comercializadora": "Curenergía (TUR)",
+    "Nombre_Tarifa": "TUR.1",
+    "Termino_Fijo_Dia": 3.83,
+    "Termino_Variable_kWh": 0.052526
+  },
+  {
+    "Comercializadora": "Endesa",
+    "Nombre_Tarifa": "Tarifa Gas Endesa",
+    "Termino_Fijo_Dia": 0.25,
+    "Termino_Variable_kWh": 0.1
+  },
+  {
+    "Comercializadora": "Endesa",
+    "Nombre_Tarifa": "Tarifa Conecta Gas",
+    "Termino_Fijo_Dia": 0.25,
+    "Termino_Variable_kWh": 0.0905
+  },
+  {
+    "Comercializadora": "TotalEnergies",
+    "Nombre_Tarifa": "Tarifa Plan A tu Aire Gas",
+    "Termino_Fijo_Dia": 0.003284,
+    "Termino_Variable_kWh": 7.0
+  },
+  {
+    "Comercializadora": "TotalEnergies",
+    "Nombre_Tarifa": "Tarifa 4 Estaciones Gas",
+    "Termino_Fijo_Dia": 0.003402,
+    "Termino_Variable_kWh": 4.87
+  },
+  {
+    "Comercializadora": "Octopus Energy",
+    "Nombre_Tarifa": "Octopus Gas RL1",
+    "Termino_Fijo_Dia": 6.418,
+    "Termino_Variable_kWh": 0.098
+  }
+]
