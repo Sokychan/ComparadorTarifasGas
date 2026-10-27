@@ -113,7 +113,7 @@ def extraer_endesa(p):
             tf_raw = pagina.locator(".commodity-card-xs__content__body__information__price").filter(has_text="Término fijo").locator(".commodity-card-xs__content__body__information__price__detail__price__discounted").first.text_content().strip().replace(",", ".")
 
             termino_variable = float(tv_raw)
-            termino_fijo_dia = float(tf_raw) / 30.0
+            termino_fijo_dia = float(tf_raw)
 
             navegador.close()
             tarifas_endesa.append({
