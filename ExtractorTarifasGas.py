@@ -152,8 +152,9 @@ def extraer_totalenergies(p):
             nombre_tarifa = pagina.locator("#bloque-redisenio-toogle-gas h2.item--title").first.text_content().strip()
             bloque_rl1 = pagina.locator("#bloque-redisenio-toogle-gas .precios--toogle-region-content").filter(has_text="RL1")
 
-            tf_raw = bloque_rl1.locator(".precios--lista .main-content").first.text_content().strip().split()[0].replace(",", ".")
-            tv_raw = bloque_rl1.locator(".contenido-plegado .precios--lista .precio-secondary").first.text_content().strip().split()[0].replace(",", ".")
+            # Corrección: Se intercambia la asignación para capturar el término variable y el término fijo (€/mes) de forma correcta
+            tv_raw = bloque_rl1.locator(".precios--lista .main-content").first.text_content().strip().split()[0].replace(",", ".")
+            tf_raw = bloque_rl1.locator(".contenido-plegado .precios--lista .precio-secondary").first.text_content().strip().split()[0].replace(",", ".")
 
             termino_fijo_mes = float(tf_raw)
             termino_variable = float(tv_raw)
