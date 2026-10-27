@@ -1,0 +1,22 @@
+1. Compila la nueva versión a ejecutable (.exe):
+
+  Bash
+
+  pyinstaller --noconsole --onefile --name "ComparadorTarifasLuz" ComparadorTarifasLuz.py
+
+2. Sube el ejecutable a GitHub Releases:
+
+  En tu repositorio de GitHub, ve a la sección Releases (a la derecha) -> Draft a new release.
+  Crea una etiqueta (Tag), por ejemplo v1.0.1.
+  En el título escribe Versión 1.0.1.
+  Arrastra tu ejecutable .exe (ubicado en la carpeta dist/ de tu PC) al cuadro de archivos (Attach binaries).
+  Haz clic en Publish release.
+
+3. Obtén el enlace del .exe cargado:
+
+  Haz clic derecho sobre el archivo .exe publicado en la sección Release y selecciona Copiar dirección de enlace.
+
+4. Actualiza version.json en GitHub:
+
+  Edita version.json en GitHub, sube el número de versión a "1.0.1", pega en "download_url" el enlace recién copiado y redacta el "changelog".
+  Guarda los cambios (Commit changes).
