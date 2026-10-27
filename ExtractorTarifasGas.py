@@ -7,7 +7,6 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 
 USER_AGENT_REAL = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 
-# Configuración del navegador optimizada para Xvfb en GitHub Actions
 LAUNCH_ARGS = {
     "headless": False,
     "args": ["--window-position=-2000,-2000", "--no-sandbox", "--disable-dev-shm-usage"]
@@ -38,14 +37,14 @@ def extraer_iberdrola(p):
         nombre_tarifa = pagina.locator("#precios-dinamicos .titulo-plan").first.text_content().strip()
         pagina.locator("#precios-dinamicos .select-potencia button").filter(has_text="Tarifa RL.1").dispatch_event("click")
 
-        termino_fijo = float(pagina.locator("#precios-dinamicos .seccion-potencia .precio-potencia .precio-con-descuento").first.text_content().strip().replace(",", "."))
+        termino_fijo_mes = float(pagina.locator("#precios-dinamicos .seccion-potencia .precio-potencia .precio-con-descuento").first.text_content().strip().replace(",", "."))
         termino_variable = float(pagina.locator("#detalle .seccion-energia .precio-hora").first.text_content().strip().split()[0].replace(",", "."))
 
         navegador.close()
         return {
             "Comercializadora": "Iberdrola",
             "Nombre_Tarifa": nombre_tarifa,
-            "Termino_Fijo_Dia": round(termino_fijo, 6),
+            "Termino_Fijo_Mes": round(termino_fijo_mes, 4),
             "Termino_Variable_kWh": round(termino_variable, 6)
         }
     except Exception as e:
@@ -71,14 +70,14 @@ def extraer_tur(p):
 
         bloque_tur = pagina.locator("#tab1 .contenedor-total-tabla-precios-123 .tabla-completa123").filter(has_text="TUR.1")
         nombre_tarifa = bloque_tur.locator(".titulo-tabla123").first.text_content().strip()
-        termino_fijo = float(bloque_tur.locator(".tabla-precios123 .fijo-tabla-precios123 .precio-sin-impuestos-tabla-precios123 .tur1-psi-fijo").first.text_content().strip().replace(",", "."))
+        termino_fijo_mes = float(bloque_tur.locator(".tabla-precios123 .fijo-tabla-precios123 .precio-sin-impuestos-tabla-precios123 .tur1-psi-fijo").first.text_content().strip().replace(",", "."))
         termino_variable = float(bloque_tur.locator(".tabla-precios123 .variable-tabla-precios123 .precio-sin-impuestos-tabla-precios123 .tur1-psi-variable").first.text_content().strip().replace(",", "."))
 
         navegador.close()
         return {
             "Comercializadora": "Curenergía (TUR)",
             "Nombre_Tarifa": nombre_tarifa,
-            "Termino_Fijo_Dia": round(termino_fijo, 6),
+            "Termino_Fijo_Mes": round(termino_fijo_mes, 4),
             "Termino_Variable_kWh": round(termino_variable, 6)
         }
     except Exception as e:
@@ -113,13 +112,13 @@ def extraer_endesa(p):
             tf_raw = pagina.locator(".commodity-card-xs__content__body__information__price").filter(has_text="Término fijo").locator(".commodity-card-xs__content__body__information__price__detail__price__discounted").first.text_content().strip().replace(",", ".")
 
             termino_variable = float(tv_raw)
-            termino_fijo_dia = float(tf_raw)
+            termino_fijo_mes = float(tf_raw)
 
             navegador.close()
             tarifas_endesa.append({
                 "Comercializadora": "Endesa",
                 "Nombre_Tarifa": nombre_tarifa,
-                "Termino_Fijo_Dia": round(termino_fijo_dia, 6),
+                "Termino_Fijo_Mes": round(termino_fijo_mes, 4),
                 "Termino_Variable_kWh": round(termino_variable, 6)
             })
         except Exception as e:
@@ -163,7 +162,7 @@ def extraer_totalenergies(p):
             tarifas_te.append({
                 "Comercializadora": "TotalEnergies",
                 "Nombre_Tarifa": nombre_tarifa,
-                "Termino_Fijo_Dia": round((termino_fijo_mes * 12) / 365.0, 6),
+                "Termino_Fijo_Mes": round(termino_fijo_mes, 4),
                 "Termino_Variable_kWh": round(termino_variable, 6)
             })
         except Exception as e:
@@ -193,14 +192,14 @@ def extraer_octopus(p):
         texto_variable = bloque_rl1.locator(".zyUhF.dewUnf.dDWCpe").filter(has_text="variable").text_content()
         tv_raw = re.search(r"variable *\s*([\d,]+)", texto_variable).group(1).replace(",", ".")
 
-        termino_fijo = float(tf_raw)
+        termino_fijo_mes = float(tf_raw)
         termino_variable = float(tv_raw)
 
         navegador.close()
         return {
             "Comercializadora": "Octopus Energy",
             "Nombre_Tarifa": nombre_tarifa,
-            "Termino_Fijo_Dia": round(termino_fijo, 6),
+            "Termino_Fijo_Mes": round(termino_fijo_mes, 4),
             "Termino_Variable_kWh": round(termino_variable, 6)
         }
     except Exception as e:
