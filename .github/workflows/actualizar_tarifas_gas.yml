@@ -3,7 +3,7 @@ name: Actualización Automática de Tarifas de Gas
 on:
   schedule:
     # Se ejecuta cada 3 días a las 04:25 UTC (05:25 AM hora peninsular española)
-    - cron: '25 4 */1 * *'
+    - cron: '13 2 */1 * *'
   workflow_dispatch:
 
 permissions:
